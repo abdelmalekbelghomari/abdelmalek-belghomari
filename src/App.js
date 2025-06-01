@@ -6,7 +6,7 @@ import {Homepage} from './pages/Homepage';
 
 function App() {
   return (
-    <div className="App bg-darkBlue text-white">
+    <div className="App text-white">
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage/>} />

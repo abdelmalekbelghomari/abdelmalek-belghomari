@@ -6,7 +6,7 @@ import SITIcon from "../assets/icons/SIT.png";
 
 function Homepage() {
   return (
-    <div className="flex flex-col md:flex-row pt-10 px-10 bg-darkBlue text-white md:pl-20 md:pr-20 md:space-x-20">
+    <div className="flex flex-col md:flex-row pt-10 px-10 text-white md:pl-20 md:pr-20 md:space-x-20">
       <div className="w-full md:w-[30%] md:pt-40">
         <ContactCard
           name={"Abdelmalek"}
