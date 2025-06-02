@@ -6,7 +6,7 @@ function ContactInfo({email}) {
     return (
         <div className="flex flex-col items-center pb-10 rounded-lg text-white shadow-lg border-blue border-2 p-6 w-full">
             <div className="space-y-4">
-                <div className="mb-1 text-xl font-medium text-white"><a href={`mailto:${email}`}>{email}</a></div>
+                <div className="mb-1 text-lg font-medium text-white"><a href={`mailto:${email}`}>{email}</a></div>
                 <div className="mb-1 text-xl font-medium text-white flex flex-wrap justify-center gap-2">
                     <PillBadge color="yellow" skill="Python" />
                     <PillBadge color="yellow" skill="AI/ML" />
