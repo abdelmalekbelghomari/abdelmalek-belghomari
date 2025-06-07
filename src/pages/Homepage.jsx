@@ -4,6 +4,8 @@ import Experience from "../components/chronological_side/Experience";
 import LCLIcon from "../assets/icons/LCL.png";
 import SITIcon from "../assets/icons/SIT.png";
 import ENSIIcon from "../assets/icons/ENSICAEN - logotype couleur.png";
+import OrangeIcon from "../assets/icons/orange.png";
+import TheoIcon from "../assets/icons/theo-white.png";
 import ScrollableContainer from '../components/chronological_side/ScrollableContainer';
 import Education from '../components/chronological_side/Education';
 
@@ -36,6 +38,21 @@ function Homepage() {
     imageURL: SITIcon
   });
 
+  const exp3 = Experience({
+    Company: "Orange Innovation Academy",
+    Position: "Entrepreneurship Program Participant",
+    StartDate: "September 2024",
+    EndDate: "February 2025",
+    City: "Caen, France",
+    Description: [
+      "Participated in a 6-month program focused on entrepreneurship and innovation.",
+      "Developed a business plan for a tech startup idea.",
+      "Collaborated with mentors and industry experts to refine the business model.",
+      "Presented the final project to a panel of judges."
+    ],
+    imageURL: OrangeIcon
+  });
+
   const edu = Education({
     School: "ENSICAEN",
     Diploma: "Master's in Computer Science, AI and Image and Sound Proccesing",
@@ -49,20 +66,35 @@ function Homepage() {
     imageURL: ENSIIcon
   })
 
+  const edu2 = Education({
+    School: "Theophile Gautier High School",
+    Diploma: "Preparatory classes for engineering schools : Mathematics, Physics and Chemistry",
+    StartDate: "September 2018",
+    EndDate: "June 2021",
+    City: "Tarbes, France",
+    Description: [
+      "Intensive program focusing on mathematics, physics, and engineering principles.",
+      "Developed strong analytical and problem-solving skills.",
+      "Participated in various engineering projects and competitions."
+    ],
+    imageURL: TheoIcon,
+  });
+
+
   const experiences = new Map();
-  experiences.set("exp", [exp1, exp2, exp1, exp2, exp1, exp2, exp1, exp2, exp1, exp2]);
-  experiences.set("edu", [edu]);
+  experiences.set("exp", [exp1, exp3, exp2]);
+  experiences.set("edu", [edu, edu2]);
 
   return (
-    <div className="flex flex-col md:flex-row pt-10 px-10 text-white md:pl-20 md:pr-20 md:space-x-20">
-      <div className="w-full md:w-[35%] md:pt-32">
+    <div className="flex flex-col lg:flex-row pt-10 px-10 text-white md:pl-20 md:pr-20 lg:space-x-20">
+      <div className="w-full lg:w-[35%] md:pt-32"> 
         <ContactCard
           name={"Abdelmalek"}
           address={"Paris, France"}
           email={"belghomariabdelmalek@gmail.com"}
         />
       </div>
-      <div className="w-full md:w-[65%]">
+      <div className="w-full lg:w-[65%]">
         <ScrollableContainer children={experiences}/>
       </div>
     </div>
