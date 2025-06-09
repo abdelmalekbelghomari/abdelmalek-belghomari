@@ -3,13 +3,30 @@ import ContactCard from "../components/contact_side/ContactCard";
 import Experience from "../components/chronological_side/Experience";
 import LCLIcon from "../assets/icons/LCL.png";
 import SITIcon from "../assets/icons/SIT.png";
+import SITGreenIcon from "../assets/icons/shibaura.jpg";
 import ENSIIcon from "../assets/icons/ENSICAEN - logotype couleur.png";
 import OrangeIcon from "../assets/icons/orange.png";
 import TheoIcon from "../assets/icons/theo-white.png";
+import DarkTheoIcon from "../assets/icons/theo.png";
+import GCPIcon from "../assets/icons/gcp.png";
+import RodatIcon from "../assets/icons/EmilieDeRodat.png";
+import WhiteRodatIcon from "../assets/icons/EmilieDeRodatWhite.png";
 import ScrollableContainer from '../components/chronological_side/ScrollableContainer';
 import Education from '../components/chronological_side/Education';
+import { useTheme } from '../theme';
 
 function Homepage() {
+
+  const { theme } = useTheme();
+  let sitIcon = SITGreenIcon;
+  let rodatIcon = WhiteRodatIcon;
+  let theoIcon = TheoIcon;
+  if (theme.background === "bg-beige") { 
+    sitIcon = SITIcon;
+    rodatIcon = RodatIcon;
+    theoIcon = DarkTheoIcon;
+  }
+
   const exp1 = Experience({
     Company: "LCL",
     Position: "Back-end Software Engineer",
@@ -35,7 +52,7 @@ function Homepage() {
       "Collaborated with a team of researchers to publish findings in international journals",
       "Presented research results at academic conferences"
     ],
-    imageURL: SITIcon
+    imageURL: sitIcon
   });
 
   const exp3 = Experience({
@@ -51,6 +68,22 @@ function Homepage() {
       "Presented the final project to a panel of judges."
     ],
     imageURL: OrangeIcon
+  });
+
+  const exp4 = Experience({
+    Company: "Google x LCL Hackathon",
+    Position: "3rd Place Winner",
+    StartDate: "09/20/2024",
+    EndDate: "09/22/2024",
+    City: "Paris, France",
+    Description: [
+      "Participated in a 48-hour hackathon organized by Google and LCL.",
+      "Developed and deployed an AI chatbot using Google Cloud Platform (GCP), LangChain, and Python.",
+      "The chatbot was designed to guide customers in applying for a bank card subscription tailored to their needs.",
+      "Collaborated with a team of developers to implement innovative AI-driven solutions.",
+      "Achieved 3rd place among 13 teams, showcasing strong problem-solving and teamwork skills."
+    ],
+    imageURL: GCPIcon
   });
 
   const edu = Education({
@@ -77,16 +110,30 @@ function Homepage() {
       "Developed strong analytical and problem-solving skills.",
       "Participated in various engineering projects and competitions."
     ],
-    imageURL: TheoIcon,
+    imageURL: theoIcon,
+  });
+
+  const edu3 = Education({
+    School: "Lycée Emilie de Rodat",
+    Diploma: "Baccalauréat S (Science) with High Honors",
+    StartDate: "September 2015",
+    EndDate: "June 2018",
+    City: "Toulouse, France",
+    Description: [
+      "Completed high school with a focus on science subjects.",
+      "Achieved high honors in the Baccalauréat exam.",
+      "Developed a strong foundation in mathematics and physics."
+    ],
+    imageURL: rodatIcon
   });
 
 
   const experiences = new Map();
-  experiences.set("exp", [exp1, exp3, exp2]);
-  experiences.set("edu", [edu, edu2]);
+  experiences.set("exp", [exp1, exp3, exp4, exp2]);
+  experiences.set("edu", [edu, edu2, edu3]);
 
   return (
-    <div className="flex flex-col lg:flex-row pt-10 px-10 text-white md:pl-20 md:pr-20 lg:space-x-20">
+    <div className="flex flex-col lg:flex-row pt-10 px-2 text-white md:pl-20 md:pr-20 lg:space-x-20 3xl:pr-[20%] 3xl:pl-[20%] 3xl:text-2xl">
       <div className="w-full lg:w-[35%] md:pt-32"> 
         <ContactCard
           name={"Abdelmalek"}

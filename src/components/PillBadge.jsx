@@ -1,4 +1,24 @@
-function PillBadge({ color = 'gray', skill = 'Skill' }) {
+import { useState, useRef } from 'react';
+import { useTheme } from '../theme';
+
+function PillBadge({ color = 'gray', skill = 'Skill', projects = [], onProjectClick }) {
+  const { theme } = useTheme();
+  const [showTooltip, setShowTooltip] = useState(false);
+  const hideTimeoutRef = useRef(null);
+  
+  const handleMouseEnter = () => {
+    // Clear any existing timeout
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+    }
+    setShowTooltip(true);
+  };
+
+  const handleMouseLeave = () => {
+    hideTimeoutRef.current = setTimeout(() => {
+      setShowTooltip(false);
+    }, 50);
+  };
   let bgClass = '';
   let textClass = '';
   let darkBgClass = '';
@@ -61,12 +81,46 @@ function PillBadge({ color = 'gray', skill = 'Skill' }) {
   }
 
   return (
-    <span
-      className={`text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ${bgClass} ${textClass} ${darkBgClass} ${darkTextClass}`}
-    >
-      {skill}
-    </span>
+    <div className="relative inline-block">
+      <span
+        className={`text-sm font-medium me-2 px-2.5 py-0.5 rounded-full ${bgClass} ${textClass} ${darkBgClass} ${darkTextClass} hover:bg-opacity-80 hover:-translate-y-1 transition-all duration-200 cursor-pointer`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {skill}
+      </span>
+      
+      {showTooltip && projects.length > 0 && (
+        <div 
+          className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-64 max-w-xs z-50"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className={`${theme.background} ${theme.textColor} text-sm rounded-lg p-3 shadow-lg border ${theme.borderColor}`}>
+            <div className="font-semibold mb-2 text-center">Projects using {skill}</div>
+            <div className="space-y-1 max-h-40 overflow-y-auto">
+              {projects.map((project, index) => (
+                <div 
+                  key={project.id || index} 
+                  className={`${theme.subTextColor} hover:text-white hover:bg-gray-700 dark:hover:bg-gray-600 cursor-pointer truncate px-2 py-1 rounded transition-colors duration-150`}
+                  onClick={() => {
+                    if (onProjectClick) {
+                      onProjectClick(project);
+                    }
+                    setShowTooltip(false);
+                  }}
+                >
+                  • {project.name || project}
+                </div>
+              ))}
+            </div>
+            {/* Arrow */}
+            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-800"></div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
-export default PillBadge;
+export default PillBadge; 
